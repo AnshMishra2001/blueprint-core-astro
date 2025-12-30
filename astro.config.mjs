@@ -3,11 +3,8 @@ import { storyblok } from '@storyblok/astro';
 import { loadEnv } from 'vite';
 import mkcert from 'vite-plugin-mkcert';
 
-import vercel from '@astrojs/vercel';
-import netlify from '@astrojs/netlify';
-
 const env = loadEnv(import.meta.env.MODE, process.cwd(), '');
-const { NETLIFY, STORYBLOK_DELIVERY_API_TOKEN, STORYBLOK_API_BASE_URL } = env;
+const {STORYBLOK_DELIVERY_API_TOKEN, STORYBLOK_API_BASE_URL } = env;
 
 export default defineConfig({
 	integrations: [
@@ -26,11 +23,13 @@ export default defineConfig({
 				grid: 'storyblok/Grid',
 				feature: 'storyblok/Feature',
 				teaser: 'storyblok/Teaser',
+				banner: 'storyblok/Banner',
+				button: 'storyblok/Button',
+				image_text: 'storyblok/ImageText',
 			},
 		}),
 	],
 	output: 'server',
-	adapter: NETLIFY ? netlify() : vercel(),
 	vite: {
 		plugins: [mkcert()],
 	},
